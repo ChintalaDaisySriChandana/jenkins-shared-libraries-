@@ -12,6 +12,9 @@ def call() {
     echo 'Building project with Maven...'
     sh 'mvn clean package'
     
+    def buildTag = "build-${env.BUILD_NUMBER}"
+                    tagBuild(buildTag, "Tagging build number ${env.BUILD_NUMBER}")
+    
     echo 'Uploading artifact...'
     archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
    
