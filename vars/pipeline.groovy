@@ -12,11 +12,11 @@ def call() {
     echo 'Building project with Maven...'
     sh 'mvn clean package'
     
-    def buildTag = "build-${env.BUILD_NUMBER}"
-                    tagBuild(buildTag, "Tagging build number ${env.BUILD_NUMBER}")
+   sh "git tag ${buildTag}"
+sh "git push origin ${buildTag}"
     
     echo 'Uploading artifact...'
-    archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
+    archiveArtifacts artifacts: 'target/petclinic-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
    
     echo 'Running Spring Boot application...'
     sh 'nohup mvn spring-boot:run &'
