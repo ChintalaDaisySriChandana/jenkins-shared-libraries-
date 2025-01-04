@@ -21,7 +21,7 @@ def build_project() {
 
 def upload_artifact(String artifactPath) {
     echo 'Uploading artifact...'
-    archiveArtifacts artifacts: artifactPath, allowEmptyArchive: true
+  archiveArtifacts artifacts: 'target/petclinic-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
 }
 
 def run_application() {
