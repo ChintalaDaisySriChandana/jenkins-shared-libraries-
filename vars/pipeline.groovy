@@ -5,6 +5,14 @@ def call() {
 
     echo 'Setting up Maven...'
     sh 'sudo apt install -y maven'
+    
+    echo 'Building project with Maven...'
+    sh 'mvn clean package'
+
+  def buildTag = "build-${env.BUILD_NUMBER}"
+                    tagBuild(buildTag, "Tagging build number ${env.BUILD_NUMBER}")
+    echo 'Uploading artifact...'
+    archiveArtifacts artifacts: artifactPath, allowEmptyArchive: true
 
     echo 'Running Spring Boot application...'
     sh 'nohup mvn spring-boot:run &'
