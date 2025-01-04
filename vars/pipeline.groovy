@@ -12,7 +12,7 @@ def call() {
   def buildTag = "build-${env.BUILD_NUMBER}"
                     tagBuild(buildTag, "Tagging build number ${env.BUILD_NUMBER}")
     echo 'Uploading artifact...'
-    archiveArtifacts artifacts: artifactPath, allowEmptyArchive: true
+   archiveArtifacts artifacts: 'target/petclinic-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
 
     echo 'Running Spring Boot application...'
     sh 'nohup mvn spring-boot:run &'
