@@ -3,17 +3,6 @@ def check_out() {
     checkout scm
 }
 
-def setup_java() {
-    echo 'Setting up Java 17...'
-    sh 'sudo apt update'
-    sh 'sudo apt install -y openjdk-17-jdk'
-}
-
-def setup_maven() {
-    echo 'Setting up Maven...'
-    sh 'sudo apt install -y maven'
-}
-
 def build_project() {
     echo 'Building project with Maven...'
     sh 'mvn clean package'
