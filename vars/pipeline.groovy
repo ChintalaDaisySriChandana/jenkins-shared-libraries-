@@ -53,6 +53,6 @@ def call() {
         error("The app did not start correctly!")
     }
 
-    echo 'Gracefully stopping the Spring Boot application...'
-    sh 'pkill -f "java -jar" || echo "No Spring Boot process found to stop"'
+   echo 'Gracefully stopping the Spring Boot application...'
+    sh 'mvn spring-boot:stop'
 }
