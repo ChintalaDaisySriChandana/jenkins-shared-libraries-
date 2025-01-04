@@ -19,11 +19,6 @@ def build_project() {
     sh 'mvn clean package'
 }
 
-def upload_artifact(String artifactPath) {
-    echo 'Uploading artifact...'
-  archiveArtifacts artifacts: 'target/petclinic-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
-}
-
 def run_application() {
     echo 'Running Spring Boot application...'
     sh 'nohup mvn spring-boot:run &'
