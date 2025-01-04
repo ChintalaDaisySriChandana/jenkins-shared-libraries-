@@ -1,4 +1,5 @@
 def call() {
+    
     echo 'Checking out code...'
     checkout scm
     
@@ -35,6 +36,4 @@ def call() {
     
     echo 'Gracefully stopping the Spring Boot application...'
     sh 'mvn spring-boot:stop'
-    echo 'Uploading artifact...'
-    archiveArtifacts artifacts: path, allowEmptyArchive: true
 }
