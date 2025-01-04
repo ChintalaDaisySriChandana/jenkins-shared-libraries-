@@ -25,9 +25,17 @@ def runSpringBootApp() {
     sh 'nohup mvn spring-boot:run &'
     sleep(time: 15, unit: 'SECONDS')
 
-    def localIp = sh(script: "hostname -I | awk '{print \$1}'", returnStdout: true).trim()
-    echo "The application is running and accessible at: http://${localIp}:8080"
+def call() {
+    echo 'Validating that the app is running...'
+    def response = sh(script: 'curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:8080', returnStdout: true).trim()
+    if (response == "200") {
+        echo 'The app is running successfully!'
+    } else {
+        echo "The app failed to start. HTTP response code: ${response}"
+        error("The app did not start correctly!")
+    }
 }
+    
 def validateAppRunning() {
     echo 'Validating that the app is running...'
     def response = sh(script: 'curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:8080', returnStdout: true).trim()
